@@ -34,7 +34,6 @@ const handleRegister = (db, bcrypt) => (req,res) =>
                 city: city,
                 address: address,
                 comment: comment,
-                role: "admin",
                 joined: new Date()
             })
             .then(user =>
