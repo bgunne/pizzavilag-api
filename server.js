@@ -36,7 +36,6 @@ app.get('/', (req,res)=>
     db.select('*').from('pizzas')
     .then(pizza =>
         {
-            //pizzas = pizza
             res.status(200).json(pizza);
         })
 });
@@ -54,9 +53,9 @@ app.delete('/manage', manage.deleteStock(db));
 app.post('/manage', manage.uploadStock(db));
 app.post('/uploadimage', uploadimage.handleUploadImage());
 
-app.listen(process.env.PORT || 3000, ()=>
+app.listen(/*process.env.PORT ||*/ 3000, ()=>
 {
-    console.log(`app is running on port ${process.env.PORT}...`);
+    console.log(`app is running on port 3000...`);//${process.env.PORT}...`);
 });
 
 /* _ENDPOINTS PLAN_
