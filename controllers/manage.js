@@ -8,9 +8,9 @@ const handleStock = (db) => (req, res) => {
 const uploadStock = (db) => (req, res) => {
     const { name, topping, price, imageurl } = req.body;
 
-    if (!name || !topping || !price) {
+    /*if (!name || !topping || !price) {
         return res.status(400).json('Tölts ki minden mezőt!');
-    }
+    }*/
 
     db.transaction(trx => {
         return trx
