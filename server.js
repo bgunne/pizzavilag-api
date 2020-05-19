@@ -14,13 +14,13 @@ const uploadimage = require('./controllers/uploadimage');
 
 const app=express();
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const db = knex({
     client: 'pg',
     connection: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
-        rejectUnauthorized: false,
+        host: '127.0.0.1',
+        user: 'postgres',
+        password:'bgunne',
+        database: 'pizzavilag'
 
     }
 });
@@ -53,9 +53,9 @@ app.delete('/manage', manage.deleteStock(db));
 app.post('/manage', manage.uploadStock(db));
 app.post('/uploadimage', uploadimage.handleUploadImage());
 
-app.listen(process.env.PORT || 3000, ()=>
+app.listen(3000, ()=>
 {
-    console.log(`app is running on port ${process.env.PORT}...`);
+    console.log('app is running on port 3000...');
 });
 
 /* _ENDPOINTS PLAN_
