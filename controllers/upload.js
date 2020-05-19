@@ -11,17 +11,18 @@ const handleUpload = (db) => (req, res) => {
     }
 
     db.transaction(trx => {
-        return trx
-            .insert({
-                name: name,
-                topping: topping,
-                price: price,
-                imageurl: imageurl
-            })
-            .into('pizzas')
-            .then(trx.commit)
-            .catch(trx.rollback);
-    })
+            return trx
+                .insert({
+                    name: name,
+                    topping,
+                    topping,
+                    price: price,
+                    imageurl: imageurl
+                })
+                .into('pizzas')
+                .then(trx.commit)
+                .catch(trx.rollback);
+        })
         .catch(err => res.status(400).json(err));
 }
 
