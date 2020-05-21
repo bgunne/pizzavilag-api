@@ -21,6 +21,14 @@ async function deleteOrder (req, res,db){
 }
 
 
+/*
 export default handleOrders/*{
         handleOrders, updateOrder, deleteOrder
     };*/
+
+    module.exports =
+{
+    handleOrders: handleOrders,
+    updateOrder: updateOrder,
+    deleteOrder: deleteOrder
+}
