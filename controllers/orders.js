@@ -1,6 +1,6 @@
 const handleOrders = async(req,res,db) =>{
     const orders = await db.select('*').from('orders').orderBy('id');
-    return res.status(200).json(orders);
+    res.status(200).json(orders);
 }
 
 async function updateOrder (req, res,db){
