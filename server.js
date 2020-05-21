@@ -11,10 +11,10 @@ import handleOrder from './controllers/order.js';
 import {handleOrders} from './controllers/orders.js';
 import {updateOrder} from './controllers/orders.js';
 import {deleteOrder} from './controllers/orders.js';
-import handleStock from './controllers/manage.js';
-import updateStock from './controllers/manage.js';
-import uploadStock from './controllers/manage.js';
-import deleteStock from './controllers/manage.js';
+import {handleStock} from './controllers/manage.js';
+import {updateStock} from './controllers/manage.js';
+import {deleteStock} from './controllers/manage.js';
+import {uploadStock} from './controllers/manage.js';
 import handleUploadImage from './controllers/uploadimage.js';
 
 const app = express();
