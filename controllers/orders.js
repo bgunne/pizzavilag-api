@@ -1,9 +1,9 @@
 const handleOrders = async (req, res, db) => {
-    const orders = db.select('*').from('orders').orderBy('id')
-        .then(orders => {
+    db.select('*').from('orders').orderBy('id')
+        .then(orders => {console.log(orders);
             res.status(200).json(orders);
         })
-    console.log(orders);
+    
     
 }
 
