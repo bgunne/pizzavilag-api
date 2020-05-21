@@ -1,5 +1,5 @@
 const handleOrders = async (req, res, db) => {
-    const orders = await db.select('*').from('orders').orderBy('id')
+    db.select('*').from('orders').orderBy('id')
         .then(orders => {
             res.status(200).json(orders);
         })
@@ -21,11 +21,10 @@ const updateOrder = async (req, res, db) => {
 
 const deleteOrder = async (req, res, db) => {
     const { id } = req.body;
-    db('orders')
+    await db('orders')
         .where('id', '=', id)
-        .del()
-        .then(res.status(200).json("Rendelés törölve."))
-        .catch(err => res.status(400).json('unable to get id'));
+        .del();
+    then(res.status(200).json("Rendelés törölve."));
 }
 
 
