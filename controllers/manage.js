@@ -3,10 +3,10 @@ const handleStock = async (req, res, db) => {
     res.status(200).json(pizza);
 }
 
-const uploadStock= async (req, res, db) => {
+const uploadStock = async (req, res, db) => {
     const { name, topping, price, imageurl } = req.body;
 
-    await db.transaction(async(trx) => {
+    await db.transaction(async (trx) => {
         await trx
             .insert(
                 {
@@ -22,7 +22,7 @@ const uploadStock= async (req, res, db) => {
     return res.status(200).json('Pizza sikeresen hozzáadva.');
 }
 
-const updateStock= async (req, res, db) => {
+const updateStock = async (req, res, db) => {
     const { id, name, topping, price, imageurl } = req.body;
     await db('pizzas')
         .where('id', '=', id)
@@ -33,7 +33,7 @@ const updateStock= async (req, res, db) => {
     res.status(200).json("Pizza adatai frissítve.");
 }
 
-const deleteStock= async (req, res, db) => {
+const deleteStock = async (req, res, db) => {
     const { id } = req.body;
     await db('pizzas')
         .where('id', '=', id)
@@ -41,6 +41,6 @@ const deleteStock= async (req, res, db) => {
     res.status(200).json("Pizza törölve.");
 }
 
-export{
+export {
     handleStock, updateStock, deleteStock, uploadStock
 };
