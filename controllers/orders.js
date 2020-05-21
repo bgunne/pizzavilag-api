@@ -1,4 +1,4 @@
-const handleOrders = async(req,res,db) =>{
+const handleOrders = async(res,db) =>{
     const orders = await db.select('*').from('orders').orderBy('id');
     res.status(200).json(orders);
 }
