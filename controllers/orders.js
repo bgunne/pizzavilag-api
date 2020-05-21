@@ -1,4 +1,4 @@
-const handleOrders = async(res,db) =>{
+export const handleOrders = async(res,db) =>{
     const orders = await db.select('*').from('orders').orderBy('id');
     return res.status(200).json(orders);
 }
@@ -25,10 +25,3 @@ async function deleteOrder (req, res,db){
 export default handleOrders/*{
         handleOrders, updateOrder, deleteOrder
     };*/
-
-    module.exports =
-{
-    handleOrders: handleOrders,
-    updateOrder: updateOrder,
-    deleteOrder: deleteOrder
-}
