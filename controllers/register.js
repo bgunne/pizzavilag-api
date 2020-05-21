@@ -8,17 +8,17 @@ const handleRegister = async (req, res, db, bcrypt) => {
     }
     const hash = bcrypt.hashSync(password);
 
-    db.transaction(trx => {
-        trx.insert(
+    await db.transaction(async trx => {
+        const loginEmail = await trx.insert(
             {
                 hash: hash,
                 email: email
             }
         )
             .into('login')
-            .returning('email')
-            .then(loginEmail => {
-                return trx('users')
+            .returning('email');
+        
+        const user = await trx('users')
                     .returning('*')
                     .insert(
                         {
@@ -31,15 +31,10 @@ const handleRegister = async (req, res, db, bcrypt) => {
                             address: address,
                             comment: comment,
                             joined: new Date()
-                        })
-                    .then(user => {
-                        res.json(user[0]);
-                    })
-            })
-            .then(trx.commit)
-            .catch(trx.rollback);
+                        });
+                        trx.commit;
+        return res.json(user[0]);
     })
-        .catch(err => res.status(400).json(err));
 }
 
 
