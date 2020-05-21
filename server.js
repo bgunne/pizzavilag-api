@@ -57,20 +57,4 @@ app.post('/uploadimage', (req,res) => {handleUploadImage(req, res)});
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}...`);
 });
-
-/* _ENDPOINTS PLAN_
-
-    /               --> GET =   pizzas
-    /signin         --> POST=   success/fail    ok
-    /register       --> POST=   user            ok
-    /order          --> POST=   user,pizzas     ok      
-    /orders         --> GET =   orders          ok
-    /orders         --> PUT =   orders          ok
-    /orders         --> DEL =   orders          ok
-    /manage         --> GET =   pizzas          ok
-    /manage         --> POST=   pizzas          ok
-    /manage         --> PUT =   pizzas          ok
-    /manage         --> DEL =   pizzas          ok
-
-*/
 export default app;
