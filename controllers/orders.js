@@ -3,8 +3,8 @@ const handleOrders = async (req, res, db) => {
         .then(orders => {
             res.status(200).json(orders);
         })
-    console.log(orders);
-    
+        .catch(err => res.status(400).json('unable to get orders'))
+
 }
 
 const updateOrder = async (req, res, db) => {
