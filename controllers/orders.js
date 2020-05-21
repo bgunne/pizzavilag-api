@@ -13,7 +13,7 @@ const updateOrder = async(req, res,db) =>{
         .where('id', '=', id)
         .update('status', statusCode)
         .returning('status');
-    return res.json(status[0]);
+    res.json(status[0]);
 }
 
 const deleteOrder = async (req, res,db) =>{
@@ -21,7 +21,7 @@ const deleteOrder = async (req, res,db) =>{
     await db('orders')
         .where('id', '=', id)
         .del();
-    return res.status(200).json("Rendelés törölve.");
+    res.status(200).json("Rendelés törölve.");
 }
 
 
