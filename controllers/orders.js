@@ -1,5 +1,5 @@
 const handleOrders = async (req, res, db) => {
-    const { orders } = db.select('*').from('orders').orderBy('id')
+    const { orders } = await db.select('*').from('orders').orderBy('id')
 
     res.status(200).json(orders);
 
