@@ -1,4 +1,4 @@
-async function handleRegister (req,res,db, bcrypt)
+const  handleRegister = async(req,res,db, bcrypt) =>
 {
     const {email, firstname, lastname, phone, zip, city, address, comment, password} = req.body;
 
