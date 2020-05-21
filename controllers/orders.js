@@ -1,17 +1,20 @@
 const handleOrders = async (req, res, db) => {
-    db.select('*').from('orders').orderBy('id')
-        .then(orders => {
-            res.status(200).json(orders);
-        })
+    const { orders } = db.select('*').from('orders').orderBy('id')
+
+    res.status(200).json(orders);
+
 }
 
 const updateOrder = async (req, res, db) => {
     const { id, statusCode } = req.body;
-    let status = db('orders')
+    db('orders')
         .where('id', '=', id)
         .update('status', statusCode)
-        .returning('status');
+        .returning('status')
+        .then(status => {
             res.json(status[0]);
+        })
+        .catch(err => res.status(400).json('unable to get status'));
 }
 
 const deleteOrder = async (req, res, db) => {
