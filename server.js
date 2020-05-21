@@ -8,7 +8,7 @@ import handleSignin from './controllers/signin.js';
 import handleRegister from './controllers/register.js';
 import handleUpload from './controllers/upload.js';
 import handleOrder from './controllers/order.js';
-import handleOrders from './controllers/orders.js';
+import {handleOrders} from './controllers/orders.js';
 /*import updateOrder from './controllers/orders.js';
 import deleteOrder from './controllers/orders.js';*/
 import handleStock from './controllers/manage.js';
