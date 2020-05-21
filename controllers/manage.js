@@ -41,6 +41,6 @@ async function deleteStock(req, res, db) {
     res.status(200).json("Pizza törölve.");
 }
 
-export default {
+export{
     handleStock, updateStock, deleteStock, uploadStock
 };

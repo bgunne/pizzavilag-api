@@ -1,31 +1,33 @@
-const handleOrders = async(req,res, db) =>
-{
+const handleOrders = async (req, res, db) => {
     db.select('*').from('orders').orderBy('id')
-    .then(orders =>
-    {
-        res.status(200).json(orders);
-    })
+        .then(orders => {
+            res.status(200).json(orders);
+        })
 }
 
-const updateOrder = async(req, res,db) =>{
+const updateOrder = async (req, res, db) => {
     const { id, statusCode } = req.body;
-    const status = await db('orders')
+    db('orders')
         .where('id', '=', id)
         .update('status', statusCode)
-        .returning('status');
-    res.json(status[0]);
+        .returning('status')
+        .then(status => {
+            res.json(status[0]);
+        })
+        .catch(err => res.status(400).json('unable to get status'));
 }
 
-const deleteOrder = async (req, res,db) =>{
+const deleteOrder = async (req, res, db) => {
     const { id } = req.body;
-    await db('orders')
+    db('orders')
         .where('id', '=', id)
-        .del();
-    res.status(200).json("Rendelés törölve.");
+        .del()
+        .then(res.status(200).json("Rendelés törölve."))
+        .catch(err => res.status(400).json('unable to get id'));
 }
 
 
 
 export {
-        handleOrders, updateOrder, deleteOrder
-    };
+    handleOrders, updateOrder, deleteOrder
+};
