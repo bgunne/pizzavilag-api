@@ -1,4 +1,4 @@
-async function handleUpload(req, res, db){
+const handleUpload = async (req, res, db) =>{
     const {
         name,
         topping,

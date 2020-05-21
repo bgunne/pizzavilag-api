@@ -1,4 +1,4 @@
-async function handleOrder(req, res, db) {
+const handleOrder = async(req, res, db) => {
     const { user, pizzas, price } = req.body;
 
     if (!user || !pizzas || !price) {
