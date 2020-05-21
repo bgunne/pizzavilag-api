@@ -1,12 +1,12 @@
-async function handleStock(req, res, db) {
+const handleStock = async (req, res, db) => {
     const pizza = await db.select('*').from('pizzas').orderBy('id')
     res.status(200).json(pizza);
 }
 
-async function uploadStock(req, res, db) {
+const uploadStock= async (req, res, db) => {
     const { name, topping, price, imageurl } = req.body;
 
-    await db.transaction(async function (trx) {
+    await db.transaction(async(trx) => {
         await trx
             .insert(
                 {
@@ -22,7 +22,7 @@ async function uploadStock(req, res, db) {
     return res.status(200).json('Pizza sikeresen hozzáadva.');
 }
 
-async function updateStock(req, res, db) {
+const updateStock= async (req, res, db) => {
     const { id, name, topping, price, imageurl } = req.body;
     await db('pizzas')
         .where('id', '=', id)
@@ -33,7 +33,7 @@ async function updateStock(req, res, db) {
     res.status(200).json("Pizza adatai frissítve.");
 }
 
-async function deleteStock(req, res, db) {
+const deleteStock= async (req, res, db) => {
     const { id } = req.body;
     await db('pizzas')
         .where('id', '=', id)
