@@ -1,8 +1,10 @@
 const handleOrders = async (req, res, db) => {
-    db.select('*').from('orders').orderBy('id')
+    const orders = db.select('*').from('orders').orderBy('id')
         .then(orders => {
             res.status(200).json(orders);
         })
+    console.log(orders);
+    
 }
 
 const updateOrder = async (req, res, db) => {
