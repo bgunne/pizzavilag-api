@@ -71,3 +71,4 @@ app.listen(process.env.PORT || 3000, ()=>
     /manage         --> DEL =   pizzas          ok
 
 */
+export default app;
