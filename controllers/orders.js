@@ -1,4 +1,4 @@
-const handleOrders = (db) => (req,res) =>
+const handleOrders = (req,res, db) =>
 {
     db.select('*').from('orders').orderBy('id')
     .then(orders =>
