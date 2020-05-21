@@ -1,6 +1,6 @@
 async function handleOrders(req,res,db){
     const orders = await db.select('*').from('orders').orderBy('id');
-    res.status(200).json(orders);
+    return res.status(200).json(orders);
 }
 
 async function updateOrder (req, res,db){
@@ -9,7 +9,7 @@ async function updateOrder (req, res,db){
         .where('id', '=', id)
         .update('status', statusCode)
         .returning('status');
-    res.json(status[0]);
+    return res.json(status[0]);
 }
 
 async function deleteOrder (req, res,db){
@@ -17,7 +17,7 @@ async function deleteOrder (req, res,db){
     await db('orders')
         .where('id', '=', id)
         .del();
-    res.status(200).json("Rendelés törölve.");
+    return res.status(200).json("Rendelés törölve.");
 }
 
 
