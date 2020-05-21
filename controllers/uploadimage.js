@@ -1,4 +1,4 @@
-const multer = require('multer');
+import multer from'multer';
 
 const handleUploadImage = () => (req, res) => {
     let storage = multer.diskStorage({

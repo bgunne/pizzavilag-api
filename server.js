@@ -1,16 +1,16 @@
-const express = require('express');
-const bcrypt = require('bcrypt-nodejs'); 
-const cors = require('cors');
-const knex = require('knex');
-const multer = require('multer');
+import express from 'express';
+import bcrypt from 'bcrypt-nodejs'; 
+import cors from 'cors';
+import knex from 'knex';
+import multer from 'multer';
 
-const signin = require('./controllers/signin');
-const register = require('./controllers/register');
-const upload = require('./controllers/upload');
-const order = require('./controllers/order');
-const orders = require('./controllers/orders');
-const manage = require('./controllers/manage');
-const uploadimage = require('./controllers/uploadimage');
+import signin from './controllers/signin';
+import register from './controllers/register';
+import upload from './controllers/upload';
+import order from './controllers/order';
+import orders from './controllers/orders';
+import manage from './controllers/manage';
+import uploadimage from './controllers/uploadimage';
 
 const app=express();
 
@@ -31,13 +31,11 @@ app.use(cors());
 
 
 
-app.get('/', (req,res)=>
+app.get('/', async function(req,res)
 {
-    db.select('*').from('pizzas')
-    .then(pizza =>
-        {
-            res.status(200).json(pizza);
-        })
+    const pizza = await db.select('*').from('pizzas')
+    res.status(200).json(pizza);
+        
 });
 
 app.post('/signin', signin.handleSignin(db, bcrypt));
@@ -59,7 +57,7 @@ app.listen(process.env.PORT || 3000, ()=>
 });
 
 /* _ENDPOINTS PLAN_
- 
+
     /               --> GET =   pizzas
     /signin         --> POST=   success/fail    ok
     /register       --> POST=   user            ok
@@ -71,4 +69,6 @@ app.listen(process.env.PORT || 3000, ()=>
     /manage         --> POST=   pizzas          ok
     /manage         --> PUT =   pizzas          ok
     /manage         --> DEL =   pizzas          ok
+
 */
+export default app;
