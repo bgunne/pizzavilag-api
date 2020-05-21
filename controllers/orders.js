@@ -7,7 +7,7 @@ const handleOrders = async(res,db) =>{
     })
 }
 
-async function updateOrder (req, res,db){
+const updateOrder = async(req, res,db) =>{
     const { id, statusCode } = req.body;
     const status = await db('orders')
         .where('id', '=', id)
@@ -16,7 +16,7 @@ async function updateOrder (req, res,db){
     return res.json(status[0]);
 }
 
-async function deleteOrder (req, res,db){
+const deleteOrder = async (req, res,db) =>{
     const { id } = req.body;
     await db('orders')
         .where('id', '=', id)
