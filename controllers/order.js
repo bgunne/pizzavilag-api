@@ -5,7 +5,7 @@ async function handleOrder(req, res, db) {
         return res.status(400).json('Adj meg minden szükséges adatot a rendeléshez!');
     }
 
-    db.transaction( async function(trx){
+    await db.transaction( async function(trx){
         await trx
             .insert(
                 {

@@ -49,11 +49,11 @@ app.post('/order', (req,res) => {handleOrder(req,res,db)});
 app.get('/orders', (req,res) => {handleOrders(req, res, db)});
 app.put('/orders', (req,res) => {updateOrder(req,res,db)});
 app.delete('/orders', (req,res) => {deleteOrder(req,res,db)});
-/*app.get('/manage', handleStock(db));
-app.put('/manage', updateStock(db));
-app.delete('/manage', deleteStock(db));
-app.post('/manage', uploadStock(db));
-app.post('/uploadimage', handleUploadImage());*/
+app.get('/manage', (req,res) => {handleStock(req, res, db)});
+app.put('/manage', (req,res) => {updateStock(req, res, db)});
+app.delete('/manage', (req,res) => {deleteStock(req, res, db)});
+app.post('/manage', (req,res) => {uploadStock(req, res, db)});
+app.post('/uploadimage', (req,res) => {handleUploadImage(req, res)});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}...`);

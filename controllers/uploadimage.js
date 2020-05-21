@@ -1,6 +1,6 @@
 import multer from 'multer';
 
-const handleUploadImage = () => (req, res) => {
+function handleUploadImage(req, res){
     let storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'public/images')
