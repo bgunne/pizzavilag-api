@@ -6,7 +6,7 @@ const handleStock = async (req, res, db) => {
 const uploadStock = async (req, res, db) => {
     const { name, topping, price, imageurl } = req.body;
 
-    if (!name.length || !topping.length || !price.length) {
+    if (!name || !topping || !price) {
         return res.status(400).json('Töltsd ki a pizza adatait!');
     }
     await db.transaction(async (trx) => {
