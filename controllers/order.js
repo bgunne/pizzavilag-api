@@ -1,30 +1,22 @@
-const handleOrder = (db) => (req,res) =>
-{
-    const {user, pizzas, price} = req.body;
+async function handleOrder(req, res, db) {
+    const { user, pizzas, price } = req.body;
 
-    if(!user || !pizzas || !price)
-    {
+    if (!user || !pizzas || !price) {
         return res.status(400).json('Adj meg minden szükséges adatot a rendeléshez!');
     }
 
-    db.transaction(trx =>
-    {
-        return trx
-        .insert(
-        {
-            user: user,
-            pizzas: pizzas,
-            price: price
-        })
-        .into('orders')
-        .then(trx.commit)
-        .catch(trx.rollback);   
+    db.transaction( async function(trx){
+        await trx
+            .insert(
+                {
+                    user: user,
+                    pizzas: pizzas,
+                    price: price
+                })
+            .into('orders');
+        return trx.commit;
     })
-    .catch(err=>res.status(400).json(err));
     return res.status(200).json('Rendelését fogadtuk.')
 }
 
-module.exports = 
-{
-    handleOrder: handleOrder
-}
+export default handleOrder;

@@ -1,37 +1,20 @@
-const handleSignin = (db, bcrypt) => (req, res) =>
-{
+async function handleSignin(req,res,db,bcrypt){
+
     const {email, password} = req.body;
     if(!email || !password)
     {
         return res.status(400).json('Minden mező kitöltése kötelező!');
     }
 
-    db.select('email', 'hash').from('login')
-    .where('email','=',email)
-    .then(data =>
-        {
-            const isValid = bcrypt.compareSync(password, data[0].hash)
-            if(isValid)
-            {
-                return db.select('*').from('users')
-                .where('email','=',email)
-                .then(user =>
-                    {
-                        res.json(user[0]);
-                    }
-                )
-                .catch(err => res.status(400).json("Bejelentkezés nem sikerült. Kérlek, próbálkozz újra később."))
-            }
-            else
-            {
-                res.status(400).json('Felhasználónév vagy jelszó hibás.');
-            }
-        }
-    )
-    .catch(err => res.status(400).json('Felhasználónév vagy jelszó hibás.'));
+    const data = await db.select('email', 'hash').from('login').where('email','=',email);
+    const isValid = bcrypt.compareSync(password, data[0].hash);
+    if(isValid){
+        const user = await db.select('*').from('users').where('email','=',email);
+        return res.json(user[0]);
+    }
+    else{
+        return res.status(400).json('Felhasználónév vagy jelszó hibás.');
+    }
 }
 
-module.exports = 
-{
-    handleSignin: handleSignin
-}
+export default handleSignin;

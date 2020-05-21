@@ -1,18 +1,23 @@
 import express from 'express';
-import bcrypt from 'bcrypt-nodejs'; 
+import bcrypt from 'bcrypt-nodejs';
 import cors from 'cors';
 import knex from 'knex';
 import multer from 'multer';
 
-import signin from './controllers/signin';
-import register from './controllers/register';
-import upload from './controllers/upload';
-import order from './controllers/order';
-import orders from './controllers/orders';
-import manage from './controllers/manage';
-import uploadimage from './controllers/uploadimage';
+import handleSignin from './controllers/signin.js';
+import handleRegister from './controllers/register.js';
+import handleUpload from './controllers/upload.js';
+import handleOrder from './controllers/order.js';
+import handleOrders from './controllers/orders.js';
+import updateOrder from './controllers/orders.js';
+import deleteOrder from './controllers/orders.js';
+import handleStock from './controllers/manage.js';
+import updateStock from './controllers/manage.js';
+import uploadStock from './controllers/manage.js';
+import deleteStock from './controllers/manage.js';
+import handleUploadImage from './controllers/uploadimage.js';
 
-const app=express();
+const app = express();
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const db = knex({
@@ -31,28 +36,26 @@ app.use(cors());
 
 
 
-app.get('/', async function(req,res)
-{
+app.get('/', async function (req, res) {
     const pizza = await db.select('*').from('pizzas')
     res.status(200).json(pizza);
-        
+
 });
 
-app.post('/signin', signin.handleSignin(db, bcrypt));
-app.post('/register', register.handleRegister(db,bcrypt));
-app.post('/upload', upload.handleUpload(db));
-app.post('/order', order.handleOrder(db));
-app.get('/orders', orders.handleOrders(db));
-app.put('/orders', orders.updateOrder(db));
-app.delete('/orders', orders.deleteOrder(db));
-app.get('/manage', manage.handleStock(db));
-app.put('/manage', manage.updateStock(db));
-app.delete('/manage', manage.deleteStock(db));
-app.post('/manage', manage.uploadStock(db));
-app.post('/uploadimage', uploadimage.handleUploadImage());
+app.post('/signin', (req,res) => {handleSignin(req, res,db, bcrypt)});
+app.post('/register', (req,res) => {handleRegister(req, res, db, bcrypt)});
+app.post('/upload', (req,res) => {handleUpload(req, res,db)});
+app.post('/order', (req,res) => {handleOrder(req,res,db)});
+app.get('/orders', (req,res) => {handleOrders(req, res, db)});
+app.put('/orders', (req,res) => {updateOrder(req,res,db)});
+app.delete('/orders', (req,res) => {deleteOrder(req,res,db)});
+/*app.get('/manage', handleStock(db));
+app.put('/manage', updateStock(db));
+app.delete('/manage', deleteStock(db));
+app.post('/manage', uploadStock(db));
+app.post('/uploadimage', handleUploadImage());*/
 
-app.listen(process.env.PORT || 3000, ()=>
-{
+app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}...`);
 });
 

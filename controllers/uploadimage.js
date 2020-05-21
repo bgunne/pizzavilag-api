@@ -1,4 +1,4 @@
-import multer from'multer';
+import multer from 'multer';
 
 const handleUploadImage = () => (req, res) => {
     let storage = multer.diskStorage({
@@ -24,6 +24,4 @@ const handleUploadImage = () => (req, res) => {
     })
 }
 
-module.exports = {
-    handleUploadImage: handleUploadImage
-}
+export default handleUploadImage;

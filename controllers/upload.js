@@ -1,4 +1,4 @@
-const handleUpload = (db) => (req, res) => {
+async function handleUpload(req, res, db){
     const {
         name,
         topping,
@@ -10,8 +10,8 @@ const handleUpload = (db) => (req, res) => {
         return res.status(400).json('Tölts ki minden mezőt!');
     }
 
-    db.transaction(trx => {
-            return trx
+    db.transaction( async function (trx){
+            await trx
                 .insert({
                     name: name,
                     topping,
@@ -19,13 +19,10 @@ const handleUpload = (db) => (req, res) => {
                     price: price,
                     imageurl: imageurl
                 })
-                .into('pizzas')
-                .then(trx.commit)
-                .catch(trx.rollback);
-        })
-        .catch(err => res.status(400).json(err));
+                .into('pizzas');
+            return trx.commit;
+            
+        });
 }
 
-module.exports = {
-    handleUpload: handleUpload
-}
+export default handleUpload;

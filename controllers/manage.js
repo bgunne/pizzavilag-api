@@ -60,11 +60,6 @@ const deleteStock = (db) => (req,res) =>
     .catch(err => res.status(400).json('unable to get id'));
 }
 
-
-module.exports =
-{
-    handleStock: handleStock,
-    updateStock: updateStock,
-    deleteStock: deleteStock,
-    uploadStock: uploadStock
-}
+export default {
+    handleStock, updateStock, deleteStock, uploadStock
+};

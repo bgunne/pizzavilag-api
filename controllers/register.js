@@ -1,4 +1,4 @@
-const handleRegister = (db, bcrypt) => (req,res) =>
+async function handleRegister (req,res,db, bcrypt)
 {
     const {email, firstname, lastname, phone, zip, city, address, comment, password} = req.body;
 
@@ -10,19 +10,16 @@ const handleRegister = (db, bcrypt) => (req,res) =>
     }
     const hash = bcrypt.hashSync(password);
 
-    db.transaction(trx =>
-    {
-        trx.insert(
+    db.transaction( async function (trx){
+        const loginEmail = trx.insert(
             {
                 hash: hash,
                 email: email
             }
         )
         .into('login')
-        .returning('email')
-        .then(loginEmail =>
-        {
-            return trx('users')
+        .returning('email');
+        const user = await trx('users')
             .returning('*')
             .insert(
             {
@@ -35,21 +32,14 @@ const handleRegister = (db, bcrypt) => (req,res) =>
                 address: address,
                 comment: comment,
                 joined: new Date()
-            })
-            .then(user =>
-            {
-                res.json(user[0]);
-            })
-        })
-        .then(trx.commit)
-        .catch(trx.rollback);
+            });
+        
+        await res.json(user[0]);
+        
+        return trx.commit;
     })
-    .catch(err => res.status(400).json(err));
 }
 
 
 
-module.exports =
-{
-    handleRegister: handleRegister
-}
+export default handleRegister;
