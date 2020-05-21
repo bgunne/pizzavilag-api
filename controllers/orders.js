@@ -1,4 +1,5 @@
-const handleOrders = async(res,db) =>{
+const handleOrders = (db) => (req,res) =>
+{
     db.select('*').from('orders').orderBy('id')
     .then(orders =>
     {
