@@ -24,7 +24,7 @@ const deleteOrder = async (req, res, db) => {
     await db('orders')
         .where('id', '=', id)
         .del();
-    then(res.status(200).json("Rendelés törölve."));
+    res.status(200).json("Rendelés törölve.");
 }
 
 
