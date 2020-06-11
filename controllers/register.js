@@ -1,13 +1,9 @@
 const handleRegister = async (req, res, db, bcrypt) => {
     const { email, firstname, lastname, phone, zip, city, address, comment, password } = req.body;
-
     if (!email || !firstname || !lastname || !phone || !zip || !city || !address || !password) {
-
         return res.status(400).json('Töltsd ki a kötelező mezőket!');
-
     }
     const hash = bcrypt.hashSync(password);
-
     await db.transaction(async trx => {
         const loginEmail = await trx.insert(
             {
@@ -17,26 +13,22 @@ const handleRegister = async (req, res, db, bcrypt) => {
         )
             .into('login')
             .returning('email');
-        
         const user = await trx('users')
-                    .returning('*')
-                    .insert(
-                        {
-                            email: loginEmail[0],
-                            firstname: firstname,
-                            lastname: lastname,
-                            phone: phone,
-                            zip: zip,
-                            city: city,
-                            address: address,
-                            comment: comment,
-                            joined: new Date()
-                        });
-                        trx.commit;
+            .returning('*')
+            .insert(
+                {
+                    email: loginEmail[0],
+                    firstname: firstname,
+                    lastname: lastname,
+                    phone: phone,
+                    zip: zip,
+                    city: city,
+                    address: address,
+                    comment: comment,
+                    joined: new Date()
+                });
+        trx.commit;
         return res.json(user[0]);
     })
 }
-
-
-
 export default handleRegister;

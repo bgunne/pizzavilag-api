@@ -1,6 +1,5 @@
 import multer from 'multer';
-
-function handleUploadImage(req, res){
+function handleUploadImage(req, res) {
     let storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'public/images')
@@ -9,11 +8,9 @@ function handleUploadImage(req, res){
             cb(null, Date.now() + '-' + file.originalname)
         }
     })
-
     let upload = multer({
         storage: storage
     }).single('file')
-
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
@@ -23,5 +20,4 @@ function handleUploadImage(req, res){
         return res.status(200).send(req.file)
     })
 }
-
 export default handleUploadImage;

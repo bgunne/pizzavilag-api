@@ -2,10 +2,8 @@ const handleStock = async (req, res, db) => {
     const pizza = await db.select('*').from('pizzas').orderBy('id')
     res.status(200).json(pizza);
 }
-
 const uploadStock = async (req, res, db) => {
     const { name, topping, price, imageurl } = req.body;
-
     if (!name || !topping || !price) {
         return res.status(400).json('Töltsd ki a pizza adatait!');
     }
@@ -24,7 +22,6 @@ const uploadStock = async (req, res, db) => {
     })
     return res.status(200).json('Pizza sikeresen hozzáadva.');
 }
-
 const updateStock = async (req, res, db) => {
     const { id, name, topping, price, imageurl } = req.body;
     await db('pizzas')
@@ -35,7 +32,6 @@ const updateStock = async (req, res, db) => {
         .update("imageurl", imageurl);
     res.status(200).json("Pizza adatai frissítve.");
 }
-
 const deleteStock = async (req, res, db) => {
     const { id } = req.body;
     await db('pizzas')
@@ -43,7 +39,6 @@ const deleteStock = async (req, res, db) => {
         .del();
     res.status(200).json("Pizza törölve.");
 }
-
 export {
     handleStock, updateStock, deleteStock, uploadStock
 };

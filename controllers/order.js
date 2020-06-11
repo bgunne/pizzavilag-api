@@ -1,11 +1,9 @@
-const handleOrder = async(req, res, db) => {
+const handleOrder = async (req, res, db) => {
     const { user, pizzas, price } = req.body;
-
     if (!user || !pizzas || !price) {
         return res.status(400).json('Adj meg minden szükséges adatot a rendeléshez!');
     }
-
-    await db.transaction( async function(trx){
+    await db.transaction(async function (trx) {
         await trx
             .insert(
                 {
@@ -18,5 +16,3 @@ const handleOrder = async(req, res, db) => {
     })
     return res.status(200).json('Rendelését fogadtuk.')
 }
-
-export default handleOrder;

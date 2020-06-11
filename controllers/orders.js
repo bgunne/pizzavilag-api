@@ -4,9 +4,7 @@ const handleOrders = async (req, res, db) => {
             res.status(200).json(orders);
         })
         .catch(err => res.status(400).json('unable to get orders'))
-
 }
-
 const updateOrder = async (req, res, db) => {
     const { id, statusCode } = req.body;
     db('orders')
@@ -18,7 +16,6 @@ const updateOrder = async (req, res, db) => {
         })
         .catch(err => res.status(400).json('unable to get status'));
 }
-
 const deleteOrder = async (req, res, db) => {
     const { id } = req.body;
     await db('orders')
@@ -26,9 +23,6 @@ const deleteOrder = async (req, res, db) => {
         .del();
     res.status(200).json("Rendelés törölve.");
 }
-
-
-
 export {
     handleOrders, updateOrder, deleteOrder
 };
