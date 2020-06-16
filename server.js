@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cors());
 app.get('/', async function (req, res) {
-    const pizza = await db.select('*').from('pizzas')
+    const pizza = await db.select('*').from('pizzas').orderBy('id');
     res.status(200).json(pizza);
 });
 app.post('/signin', (req, res) => { handleSignin(req, res, db, bcrypt) });
