@@ -2,7 +2,6 @@ import express from 'express';
 import bcrypt from 'bcrypt-nodejs';
 import cors from 'cors';
 import knex from 'knex';
-import multer from 'multer';
 import handleSignin from './controllers/signin.js';
 import handleRegister from './controllers/register.js';
 import handleUpload from './controllers/upload.js';
