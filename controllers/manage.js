@@ -41,4 +41,4 @@ const deleteStock = async (req, res, db) => {
 }
 export {
     handleStock, updateStock, deleteStock, uploadStock
-};
+}; 

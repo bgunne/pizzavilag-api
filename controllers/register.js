@@ -31,4 +31,4 @@ const handleRegister = async (req, res, db, bcrypt) => {
         return res.json(user[0]);
     })
 }
-export default handleRegister;
+export default handleRegister; 
