@@ -26,4 +26,3 @@ const deleteOrder = async (req, res, db) => {
 export {
     handleOrders, updateOrder, deleteOrder
 };
- 

@@ -19,6 +19,6 @@ const handleUpload = async (req, res, db) => {
             })
             .into('pizzas');
         return trx.commit;
-    }); 
+    });
 }
 export default handleUpload;

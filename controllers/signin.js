@@ -13,4 +13,4 @@ const handleSignin = async (req, res, db, bcrypt) => {
         return res.status(400).json('incorrect_data');
     }
 }
-export default handleSignin; 
+export default handleSignin;

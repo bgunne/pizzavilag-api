@@ -17,4 +17,3 @@ const handleOrder = async (req, res, db) => {
     return res.status(200).json('order_success')
 }
 export default handleOrder;
- 
