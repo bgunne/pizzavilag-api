@@ -1,7 +1,7 @@
 const handleRegister = async (req, res, db, bcrypt) => {
     const { email, firstname, lastname, phone, zip, city, address, comment, password } = req.body;
     if (!email || !firstname || !lastname || !phone || !zip || !city || !address || !password) {
-        return res.status(400).json('Töltsd ki a kötelező mezőket!');
+        return res.status(400).json('deficient_data');
     }
     const hash = bcrypt.hashSync(password);
     await db.transaction(async trx => {

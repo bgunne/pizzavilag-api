@@ -1,7 +1,7 @@
 const handleOrder = async (req, res, db) => {
     const { user, pizzas, price } = req.body;
     if (!user || !pizzas || !price) {
-        return res.status(400).json('Adj meg minden szükséges adatot a rendeléshez!');
+        return res.status(400).json('deficient_data');
     }
     await db.transaction(async function (trx) {
         await trx
@@ -14,6 +14,6 @@ const handleOrder = async (req, res, db) => {
             .into('orders');
         return trx.commit;
     })
-    return res.status(200).json('Rendelését fogadtuk.')
+    return res.status(200).json('order_success')
 }
 export default handleOrder;

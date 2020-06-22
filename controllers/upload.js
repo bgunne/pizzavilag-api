@@ -6,7 +6,7 @@ const handleUpload = async (req, res, db) => {
         imageurl
     } = req.body;
     if (!name || !topping || !price) {
-        return res.status(400).json('Tölts ki minden mezőt!');
+        return res.status(400).json('deficient_data');
     }
     db.transaction(async function (trx) {
         await trx
